@@ -51,7 +51,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 0
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 2098073389463759084}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &3531445886534725
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -76,7 +80,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &447039739496508349
 GameObject:
@@ -129,7 +133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 5
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 7128336830445257994}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &5299985098682466066
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &811666072553189908
 GameObject:
@@ -207,7 +215,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 3
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 8190786587671383555}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &5844146732877977624
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,7 +244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1403510469407560204
 GameObject:
@@ -285,7 +297,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 2
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 811666072553189908}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &6431287914030803806
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -310,7 +326,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2098073389463759084
 GameObject:
@@ -363,7 +379,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 1
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 1403510469407560204}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &975102489490371417
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -388,7 +408,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2581634039911581750
 GameObject:
@@ -441,7 +461,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 9
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 0}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &883978195973247482
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -466,7 +490,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &5562803875130708766
 GameObject:
@@ -519,7 +543,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 7
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 5562803875130708766}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &7497187728919523192
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -544,7 +572,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &7100447223375345091
 GameObject:
@@ -642,7 +670,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 6
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 5562803875130708766}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &760519960076845777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -667,7 +699,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &8190786587671383555
 GameObject:
@@ -720,7 +752,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 4
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 447039739496508349}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &7313554852261552665
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -745,7 +781,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &8911654709485751597
 GameObject:
@@ -798,7 +834,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 8
+  matchNum: 0
   currentNode: {fileID: 0}
+  rightNode: {fileID: 8911654709485751597}
+  downNode: {fileID: 0}
+  filled: 0
 --- !u!61 &9027639007665556473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -823,5 +863,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0

@@ -10,10 +10,22 @@ public class NodePositionDetection : MonoBehaviour
 
     public GameObject currentNode;
 
+    public GameObject rightNode;
+
+    public GameObject downNode;
+
+    public bool filled = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.gameObject.GetComponent<A3NodeBehaviour>().row = row;
         other.gameObject.GetComponent<A3NodeBehaviour>().col = col;
         currentNode = other.gameObject;
+        filled = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        filled = false;
     }
 }

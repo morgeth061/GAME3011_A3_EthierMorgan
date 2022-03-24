@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Row
   - GameWindow
+  - SwapNode
+  - A3Row
+  - Grid
   layers:
   - Default
   - TransparentFX
