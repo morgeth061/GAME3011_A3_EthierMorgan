@@ -20,6 +20,8 @@ public class A3NodeBehaviour : MonoBehaviour
 
     public int nodeColour;
 
+    public bool isInMatch = false;
+
     public GameObject gridRef;
 
     // Start is called before the first frame update
@@ -55,14 +57,36 @@ public class A3NodeBehaviour : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnNodeClick()
     {
         gridRef.GetComponent<SwapManager>().SwapBehaviour(this.gameObject);
+    }
+
+    public void UpdateColour()
+    {
+        if (nodeColour == 0)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite1;
+        }
+        else if (nodeColour == 1)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite2;
+        }
+        else if (nodeColour == 2)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite3;
+        }
+        else if (nodeColour == 3)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite4;
+        }
+        else if (nodeColour == 4)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite5;
+        }
+        else if (nodeColour == 5)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = sprite6;
+        }
     }
 }

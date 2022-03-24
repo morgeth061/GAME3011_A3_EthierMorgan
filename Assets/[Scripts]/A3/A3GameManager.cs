@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class A3GameManager : MonoBehaviour
@@ -11,9 +12,15 @@ public class A3GameManager : MonoBehaviour
 
     public GameObject nodeRef;
 
-    private bool gameBegin = false;
+    public bool gameBegin = false;
 
-    public bool gridLock = false;
+    public bool swapLock = true;
+
+    public bool spawnLock = false;
+
+    public bool recheck = false;
+
+    private bool fullyFilled = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +38,8 @@ public class A3GameManager : MonoBehaviour
         nodes = GameObject.FindGameObjectsWithTag("SwapNode");
         if (gameBegin == false && nodes.Length >= 100)
         {
-            bool fullyFilled = true;
+            //print("Test");
+            fullyFilled = true;
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -40,6 +48,12 @@ public class A3GameManager : MonoBehaviour
                         .GetComponent<NodePositionDetection>().filled == false ||
                         nodes[(i * 10) + j].GetComponent<Rigidbody2D>().velocity.y != 0)
                     {
+                        if (GameObject.FindGameObjectsWithTag("A3Row")[i].transform.GetChild(j).gameObject
+                            .GetComponent<NodePositionDetection>().filled == false)
+                        {
+                            //print(i + " , " + j);
+                        }
+                        
                         fullyFilled = false;
                         break;
                     }
@@ -53,64 +67,105 @@ public class A3GameManager : MonoBehaviour
 
             if (fullyFilled)
             {
-                print("HELP");
-                gameBegin = true;
-                gridLock = true;
-                //ChangeLock(RigidbodyType2D.Static);
+                print("Grid Fully Filled");
+                CheckForMatches();
+
+                if (!recheck)
+                {
+                    print("Game Begin");
+                    gameBegin = true;
+                    swapLock = false;
+                    spawnLock = true;
+                }
+            }
+        }
+        else if (gameBegin && nodes.Length >= 100 && swapLock)
+        {
+            fullyFilled = true;
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (GameObject.FindGameObjectsWithTag("A3Row")[i].transform.GetChild(j).gameObject
+                            .GetComponent<NodePositionDetection>().filled == false ||
+                        nodes[(i * 10) + j].GetComponent<Rigidbody2D>().velocity.y != 0)
+                    {
+                        if (GameObject.FindGameObjectsWithTag("A3Row")[i].transform.GetChild(j).gameObject
+                            .GetComponent<NodePositionDetection>().filled == false)
+                        {
+                            //print(i + " , " + j);
+                        }
+
+                        fullyFilled = false;
+                        break;
+                    }
+
+                    if (!fullyFilled)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (fullyFilled)
+            {
+                print("Grid Fully Filled");
+                CheckForMatches();
+
+                if (!recheck)
+                {
+                    swapLock = false;
+                    spawnLock = true;
+                }
             }
         }
         else
         {
-            if (gridLock == true && nodes[0].GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
-            {
-                //ChangeLock(RigidbodyType2D.Static);
-            }
-
-            if (gridLock == false && nodes[0].GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Static)
-            {
-                //ChangeLock(RigidbodyType2D.Dynamic);
-            }
-        }
-    }
-
-    private void ChangeLock(UnityEngine.RigidbodyType2D type)
-    {
-        foreach (GameObject node in nodes)
-        {
-            node.GetComponent<Rigidbody2D>().bodyType = type;
+            spawnLock = false;
         }
     }
 
     public void CheckForMatches()
     {
-        ChangeLock(RigidbodyType2D.Dynamic);
+        recheck = false;
+        swapLock = true;
+        spawnLock = true;
+
         GameObject gridObj = GameObject.FindWithTag("Grid");
+        print(("Checking for matches"));
 
         foreach (Transform rowTransform in gridObj.transform)
         {
             foreach (Transform nodeTransform in rowTransform)
             {
+
                 GameObject currentNode = nodeTransform.gameObject.GetComponent<NodePositionDetection>().currentNode;
-                
-                if (nodeTransform.gameObject.GetComponent<NodePositionDetection>().rightNode)
+
+                if (nodeTransform.gameObject.GetComponent<NodePositionDetection>().rightNode) //Check if right node exists
                 {
                     GameObject rightNode = nodeTransform.gameObject.GetComponent<NodePositionDetection>().rightNode.GetComponent<NodePositionDetection>().currentNode;
-                    if (rightNode.GetComponent<A3NodeBehaviour>().nodeColour == currentNode.GetComponent<A3NodeBehaviour>().nodeColour)
+                    if (!rightNode.GetComponent<A3NodeBehaviour>().isInMatch && currentNode.GetComponent<A3NodeBehaviour>().nodeColour == rightNode.GetComponent<A3NodeBehaviour>().nodeColour)
                     {
-                        currentNode.GetComponent<A3NodeBehaviour>().horizMatchNum = 1 + currentNode.GetComponent<A3NodeBehaviour>().horizMatchNum;
-                        rightNode.GetComponent<A3NodeBehaviour>().horizMatchNum = currentNode.GetComponent<A3NodeBehaviour>().horizMatchNum;
-
+                        if (CheckForMatchingNeigbour(
+                            nodeTransform.GetComponent<NodePositionDetection>().rightNode.transform, rightNode, true))
+                        {
+                            currentNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                            rightNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                        }
                     }
                 }
 
                 if (nodeTransform.gameObject.GetComponent<NodePositionDetection>().downNode)
                 {
                     GameObject downNode = nodeTransform.gameObject.GetComponent<NodePositionDetection>().downNode.GetComponent<NodePositionDetection>().currentNode;
-                    if (downNode.GetComponent<A3NodeBehaviour>().nodeColour == currentNode.GetComponent<A3NodeBehaviour>().nodeColour)
+                    if (!downNode.GetComponent<A3NodeBehaviour>().isInMatch && currentNode.GetComponent<A3NodeBehaviour>().nodeColour == downNode.GetComponent<A3NodeBehaviour>().nodeColour)
                     {
-                        currentNode.GetComponent<A3NodeBehaviour>().vertMatchNum = 1 + currentNode.GetComponent<A3NodeBehaviour>().vertMatchNum;
-                        downNode.GetComponent<A3NodeBehaviour>().vertMatchNum = currentNode.GetComponent<A3NodeBehaviour>().vertMatchNum;
-
+                        if (CheckForMatchingNeigbour(
+                            nodeTransform.GetComponent<NodePositionDetection>().downNode.transform, downNode, false))
+                        {
+                            currentNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                            downNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                        }
                     }
                 }
             }
@@ -121,19 +176,70 @@ public class A3GameManager : MonoBehaviour
 
         foreach (GameObject node in nodes)
         {
-            if (node.GetComponent<A3NodeBehaviour>().horizMatchNum >= 3 ||
-                node.GetComponent<A3NodeBehaviour>().vertMatchNum >= 3)
+            if (node.GetComponent<A3NodeBehaviour>().isInMatch)
             {
-                print(("DESTROY"));
+                //print(("DESTROY"));
+                gridObj.transform.GetChild(node.GetComponent<A3NodeBehaviour>().row).
+                    transform.GetChild(node.GetComponent<A3NodeBehaviour>().col).GetComponent<NodePositionDetection>()
+                    .currentNode = null;
+                gridObj.transform.GetChild(node.GetComponent<A3NodeBehaviour>().row).transform
+                    .GetChild(node.GetComponent<A3NodeBehaviour>().col).GetComponent<NodePositionDetection>()
+                    .filled = false;
                 Destroy(node);
-            }
-            else
-            {
-                node.GetComponent<A3NodeBehaviour>().horizMatchNum = 1;
-                node.GetComponent<A3NodeBehaviour>().vertMatchNum = 1;
+                
+                recheck = true;
             }
         }
 
-        gridLock = false;
+        print("Destroyed");
+
+        fullyFilled = false;
+        spawnLock = false;
+    }
+
+    private bool CheckForMatchingNeigbour(Transform nodeTransform, GameObject node, bool right)
+    {
+        if (right)
+        {
+            if (nodeTransform.gameObject.GetComponent<NodePositionDetection>().rightNode)
+            {
+                GameObject rightNode = nodeTransform.gameObject.GetComponent<NodePositionDetection>().rightNode.GetComponent<NodePositionDetection>().currentNode;
+                if (rightNode.GetComponent<A3NodeBehaviour>().nodeColour == node.GetComponent<A3NodeBehaviour>().nodeColour)
+                {
+                    node.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                    rightNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                    return CheckForMatchingNeigbour(nodeTransform.GetComponent<NodePositionDetection>().rightNode.transform, rightNode, true);
+                }
+            }
+        }
+        else
+        {
+            if (nodeTransform.gameObject.GetComponent<NodePositionDetection>().downNode)
+            {
+                GameObject downNode = nodeTransform.gameObject.GetComponent<NodePositionDetection>().downNode.GetComponent<NodePositionDetection>().currentNode;
+                //print(downNode.GetComponent<A3NodeBehaviour>().row + " , " + downNode.GetComponent<A3NodeBehaviour>().col);
+                if (downNode.GetComponent<A3NodeBehaviour>().nodeColour == node.GetComponent<A3NodeBehaviour>().nodeColour)
+                {
+                    node.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                    downNode.GetComponent<A3NodeBehaviour>().isInMatch = true;
+                    return CheckForMatchingNeigbour(nodeTransform.GetComponent<NodePositionDetection>().downNode.transform, downNode, false);
+
+                }
+            }
+        }
+
+        if (node.GetComponent<A3NodeBehaviour>().isInMatch)
+        {
+            return true;
+        }
+        return false;
+
     }
 }
+
+
+/*
+ * Check for Match -
+ * update node positions
+ * next tick, check for matches
+ */

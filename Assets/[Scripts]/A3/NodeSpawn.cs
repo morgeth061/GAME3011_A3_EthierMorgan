@@ -12,7 +12,7 @@ public class NodeSpawn : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (gameManager.GetComponent<A3GameManager>().gridLock == false)
+        if (gameManager.GetComponent<A3GameManager>().spawnLock == false || gameManager.GetComponent<A3GameManager>().gameBegin == false)
         {
             Instantiate(nodeRef, spawnPoint.transform.position, Quaternion.identity, spawnPoint.transform);
         }

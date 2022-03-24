@@ -24,8 +24,20 @@ public class NodePositionDetection : MonoBehaviour
         filled = true;
     }
 
+    private void Update()
+    {
+        if (currentNode)
+        {
+            filled = true;
+        }
+        else
+        {
+            filled = false;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        filled = false;
+        //filled = false;
     }
 }
