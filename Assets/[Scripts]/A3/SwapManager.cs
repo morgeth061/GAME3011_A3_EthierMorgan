@@ -23,14 +23,22 @@ public class SwapManager : MonoBehaviour
                  (swapNode.GetComponent<A3NodeBehaviour>().col == firstNode.GetComponent<A3NodeBehaviour>().col + 1 ||
                   swapNode.GetComponent<A3NodeBehaviour>().col == firstNode.GetComponent<A3NodeBehaviour>().col - 1))) //Check for adjacent
             {
-                print("SWAP");
                 secondNode = swapNode;
 
                 int firstColour = firstNode.GetComponent<A3NodeBehaviour>().nodeColour;
                 int secondColour = secondNode.GetComponent<A3NodeBehaviour>().nodeColour;
 
+                bool vertBomb = firstNode.GetComponent<A3NodeBehaviour>().vertBomb;
+                bool horizBomb = firstNode.GetComponent<A3NodeBehaviour>().horizBomb;
+
                 firstNode.GetComponent<A3NodeBehaviour>().nodeColour = secondColour;
                 secondNode.GetComponent<A3NodeBehaviour>().nodeColour = firstColour;
+
+                firstNode.GetComponent<A3NodeBehaviour>().vertBomb = secondNode.GetComponent<A3NodeBehaviour>().vertBomb;
+                secondNode.GetComponent<A3NodeBehaviour>().vertBomb = vertBomb;
+
+                firstNode.GetComponent<A3NodeBehaviour>().horizBomb = secondNode.GetComponent<A3NodeBehaviour>().horizBomb;
+                secondNode.GetComponent<A3NodeBehaviour>().horizBomb = horizBomb;
 
                 firstNode.GetComponent<A3NodeBehaviour>().UpdateColour();
                 secondNode.GetComponent<A3NodeBehaviour>().UpdateColour();

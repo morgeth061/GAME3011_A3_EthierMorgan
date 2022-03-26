@@ -233,7 +233,27 @@ MonoBehaviour:
   sprite4: {fileID: 21300000, guid: 0c650e9a914ac1d4b814ff43b10a014a, type: 3}
   sprite5: {fileID: 21300000, guid: aaccdc8df56f64345983e68352f3c6be, type: 3}
   sprite6: {fileID: 21300000, guid: 8d9d26032c946d949a741e51ed74d475, type: 3}
+  sprite7: {fileID: 21300000, guid: cd198831b51c4a5449e3c9b363e45a8f, type: 3}
+  sprite8: {fileID: 0}
+  sprite1_v: {fileID: 21300000, guid: 61dfd8aff86bd1d4d8f6c4a0d6cc916c, type: 3}
+  sprite1_h: {fileID: 21300000, guid: f0f9d41c84cd23f4aacb29de3ba49c6f, type: 3}
+  sprite2_v: {fileID: 21300000, guid: 21e9450abf8b7414785992248c224ad5, type: 3}
+  sprite2_h: {fileID: 21300000, guid: 6c3ce8fb9a2af7e4c9fecb6a58876a6d, type: 3}
+  sprite3_v: {fileID: 21300000, guid: b6ea5f38ae3d4114984ed537d3f90bea, type: 3}
+  sprite3_h: {fileID: 21300000, guid: fd5f5e411511e3a4d8cf936dbb033301, type: 3}
+  sprite4_v: {fileID: 21300000, guid: 187fd4b28e4c7bb47ba500bec2e916b1, type: 3}
+  sprite4_h: {fileID: 21300000, guid: 71c86ca40a148dc409998b8e03403514, type: 3}
+  sprite5_v: {fileID: 21300000, guid: 7a90a2d4c6a3d424cbf8b5999091a311, type: 3}
+  sprite5_h: {fileID: 21300000, guid: feb31e8c1c04517438c64543230b4d45, type: 3}
+  sprite6_v: {fileID: 21300000, guid: 81cd773194640e7418cabfddcda41317, type: 3}
+  sprite6_h: {fileID: 21300000, guid: 75bbe2c473a3ca9438f2d7f1091dfb98, type: 3}
   nodeColour: 0
+  isInMatch: 0
+  isActive: 0
+  horizBomb: 0
+  vertBomb: 0
+  immovable: 0
+  nodePool: {fileID: 0}
   gridRef: {fileID: 0}
 --- !u!50 &1703577741689428019
 Rigidbody2D:

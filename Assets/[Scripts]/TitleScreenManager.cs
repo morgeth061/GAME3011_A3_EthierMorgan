@@ -14,4 +14,9 @@ public class TitleScreenManager : MonoBehaviour
     {
         SceneManager.LoadScene("Assignment2");
     }
+
+    public void OnAssignment3ButtonClick()
+    {
+        SceneManager.LoadScene("Assignment3");
+    }
 }

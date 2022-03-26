@@ -23,10 +23,19 @@ public class A3GameButtonBehaviour : MonoBehaviour
     public void OnMatchButtonClick()
     {
         gameVisible = !gameVisible;
-        gameWindow.SetActive(gameVisible);
+        
         if (gameVisible)
         {
-            //gameWindow.transform.Find("Lock").gameObject.GetComponent<LockBehaviour>().Setup(lockDifficulty);
+            gameWindow.SetActive(gameVisible);
+            gameWindow.GetComponent<A3GameManager>().BeginGame();
+        }
+        else
+        {
+            foreach (GameObject node in GameObject.FindGameObjectsWithTag("SwapNode"))
+            {
+                Destroy(node);
+            }
+            gameWindow.SetActive(gameVisible);
         }
     }
 }

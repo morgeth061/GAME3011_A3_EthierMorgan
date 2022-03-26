@@ -38,6 +38,7 @@ public class NodePositionDetection : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        //currentNode = null;
         //filled = false;
     }
 }

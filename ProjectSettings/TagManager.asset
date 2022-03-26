@@ -9,6 +9,7 @@ TagManager:
   - SwapNode
   - A3Row
   - Grid
+  - NodePool
   layers:
   - Default
   - TransparentFX
